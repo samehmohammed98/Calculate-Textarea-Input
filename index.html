@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Vue Calculate Product</title>
+</head>
+<body>
+  <div id="vue-test" class="container" >
+    <h4>Write Your Message ( {{ maxLength }} Characters Allowed )</h4>
+
+    <textarea @input='countChars' 
+      v-model='message' 
+      :maxlength='maxLength'
+      ></textarea>
+      
+    <span class="counter" :class='{"zero": reachZero}'>
+      Left | <span>{{ remainingChars }}</span>
+    </span>
+  </div>
+
+  <script src="js/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#vue-test',
+      data: {
+        maxLength: 20,
+        remainingChars: 20,
+        message: null,
+        reachZero: false
+      },
+      methods: {
+        countChars: function() {
+          this.remainingChars = this.maxLength - this.message.length;
+          this.reachZero = this.remainingChars === 0;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
